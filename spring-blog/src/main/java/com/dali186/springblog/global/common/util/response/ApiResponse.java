@@ -15,7 +15,7 @@ public class ApiResponse<T> {
     private String message;
     private T data;
 
-    public static <T> ApiResponse<T> success(T data) {
+    public static <T>ApiResponse<T> success(T data) {
         return ApiResponse.<T>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("OK")
@@ -23,7 +23,7 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    public static <T> ApiResponse<T> error(String message, int statusCode) {
+    public static <T>ApiResponse<T> error(String message, int statusCode) {
         return ApiResponse.<T>builder()
                 .message(message)
                 .statusCode(statusCode)

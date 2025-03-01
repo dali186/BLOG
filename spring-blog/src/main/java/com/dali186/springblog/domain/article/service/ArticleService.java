@@ -2,8 +2,10 @@ package com.dali186.springblog.domain.article.service;
 
 import com.dali186.springblog.domain.article.dto.ArticleDto;
 import com.dali186.springblog.domain.article.model.Article;
+import com.dali186.springblog.domain.article.model.Category;
+import com.dali186.springblog.domain.article.model.Tag;
 import com.dali186.springblog.domain.article.repository.ArticleRepository;
-import com.dali186.springblog.global.common.CommonString;
+import com.dali186.springblog.global.common.util.CommonString;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -58,5 +60,17 @@ public class ArticleService {
     public void deleteArticle(Long articleId) {
 
         articleRepository.deleteById(articleId);
+    }
+
+    @Transactional
+    public List<Category> getAllCategories() {
+
+        return articleRepository.findAllCategories();
+    }
+
+    @Transactional
+    public List<Tag> getAllTagsById(Long categorySn) {
+
+        return articleRepository.findAllTagsById(categorySn);
     }
 }

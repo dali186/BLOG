@@ -1,4 +1,4 @@
-package com.dali186.springblog.global.common;
+package com.dali186.springblog.global.common.util;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

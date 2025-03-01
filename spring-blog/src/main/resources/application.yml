@@ -8,7 +8,6 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/BLOG?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/blog_spring_next?serverTimezone=Asia/Seoul
     username: blogadmin
     password: blogadmin
-

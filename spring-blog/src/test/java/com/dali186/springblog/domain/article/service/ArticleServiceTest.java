@@ -2,8 +2,10 @@ package com.dali186.springblog.domain.article.service;
 
 import com.dali186.springblog.domain.article.dto.ArticleDto;
 import com.dali186.springblog.domain.article.model.Article;
+import com.dali186.springblog.domain.article.model.Category;
+import com.dali186.springblog.domain.article.model.Tag;
 import com.dali186.springblog.domain.article.repository.ArticleRepository;
-import com.dali186.springblog.global.common.CommonString;
+import com.dali186.springblog.global.common.util.CommonString;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +34,8 @@ class ArticleServiceTest {
     private ArticleRepository articleRepository;
 
     private ArticleDto articleDto;
+    private List<Category> categories;
+    private List<Tag> tags;
 
     @BeforeEach
     public void setUp() {
@@ -41,6 +46,21 @@ class ArticleServiceTest {
                 .content("articleContent")
                 .categoryId(2L)
                 .build();
+
+        categories = new ArrayList<>();
+        categories.add(new Category(1L, "프로그래밍 언어"));
+        categories.add(new Category(2L, "웹 개발"));
+        categories.add(new Category(3L, "프레임워크"));
+        categories.add(new Category(4L, "라이브러리"));
+        categories.add(new Category(5L, "데이터베이스"));
+        categories.add(new Category(6L, "인프라"));
+        categories.add(new Category(7L, "DevOps"));
+        categories.add(new Category(8L, "알고리즘"));
+
+        tags = new ArrayList<>();
+        tags.add(new Tag(1L, 1L, "Java"));
+        tags.add(new Tag(1L, 2L, "JavaScript"));
+        tags.add(new Tag(1L, 3L, "Python"));
     }
 
     @Test
@@ -96,7 +116,7 @@ class ArticleServiceTest {
         // then
         assertNotNull(articles);
         assertEquals(2, articles.size());
-        assertEquals("제목1", articles.get(0).getTitle());
+        assertEquals("articleTitle", articles.get(0).getTitle());
     }
 
     @Test
@@ -132,5 +152,28 @@ class ArticleServiceTest {
         articleService.deleteArticle(articleId);
         // then
         verify(articleRepository).deleteById(articleId);
+    }
+
+    @Test
+    @DisplayName("전체 카테고리 리스트 조회 테스트")
+    void testSelectCategories() {
+        // given
+        when(articleRepository.findAllCategories()).thenReturn(categories);
+        // when
+        List<Category> selectedCategories = articleService.getAllCategories();
+        // then
+        assertEquals(selectedCategories.get(2).getCategorySn(), categories.get(2).getCategorySn());
+    }
+
+    @Test
+    @DisplayName("카테고리 번호에 따른 태그 조회")
+    void testSelectTagsByCategorySn() {
+        // given
+        Long categorySn = 1L;
+        when(articleRepository.findAllTagsById(categorySn)).thenReturn(tags);
+        // when
+        List<Tag> selectedTags = articleService.getAllTagsById(categorySn);
+        // then
+        assertEquals(selectedTags.get(2).getCategorySn(), tags.get(2).getCategorySn());
     }
 }

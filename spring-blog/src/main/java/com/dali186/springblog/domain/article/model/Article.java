@@ -29,6 +29,9 @@ public class Article {
     @Column(length = 2, nullable = false)
     private Long categoryId;
 
+    @Column(length = 2, nullable = false)
+    private Long tagSn;
+
     public void updateArticleData(ArticleDto updatedArticleDto) {
         this.title = updatedArticleDto.getTitle();
         this.content = updatedArticleDto.getContent();

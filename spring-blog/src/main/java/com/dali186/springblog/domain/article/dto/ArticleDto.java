@@ -11,11 +11,11 @@ public class ArticleDto {
     private Long memberSn;
     private String title;
     private String content;
-    private Long categoryId;
+    private Long categorySn;
     private Long typeSn;
 
     public Article toEntity() {
 
-        return new Article(articleSn, memberSn, title, content, categoryId, typeSn);
+        return new Article(articleSn, memberSn, title, content, categorySn, typeSn);
     }
 }

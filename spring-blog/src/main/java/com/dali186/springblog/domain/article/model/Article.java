@@ -28,7 +28,7 @@ public class Article extends BaseEntity {
     private String content;
 
     @Column(length = 2, nullable = false)
-    private Long categoryId;
+    private Long categorySn;
 
     @Column(length = 2, nullable = false)
     private Long tagSn;
@@ -36,6 +36,6 @@ public class Article extends BaseEntity {
     public void updateArticleData(ArticleDto updatedArticleDto) {
         this.title = updatedArticleDto.getTitle();
         this.content = updatedArticleDto.getContent();
-        this.categoryId = updatedArticleDto.getCategoryId();
+        this.categorySn = updatedArticleDto.getCategorySn();
     }
 }

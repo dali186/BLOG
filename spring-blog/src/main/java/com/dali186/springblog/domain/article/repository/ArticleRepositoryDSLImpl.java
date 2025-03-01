@@ -5,6 +5,7 @@ import com.dali186.springblog.domain.article.model.QCategory;
 import com.dali186.springblog.domain.article.model.QTag;
 import com.dali186.springblog.domain.article.model.Tag;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

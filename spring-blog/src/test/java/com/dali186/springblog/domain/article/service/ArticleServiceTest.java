@@ -5,7 +5,7 @@ import com.dali186.springblog.domain.article.model.Article;
 import com.dali186.springblog.domain.article.model.Category;
 import com.dali186.springblog.domain.article.model.Tag;
 import com.dali186.springblog.domain.article.repository.ArticleRepository;
-import com.dali186.springblog.global.common.util.CommonString;
+import com.dali186.springblog.global.common.util.constant.CommonString;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

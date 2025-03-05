@@ -3,6 +3,9 @@ import NavHead from "@/containers/NavHead/NavHead";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import '@/app/globals.css';
+import Category from "@/containers/Category/Category";
+import HorizontalArticleList from "@/containers/HorizontalArticleList/HorizontalArticleList";
+import LinearArticleList from "@/containers/LinearArticleList/LinearArticleList";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,8 +25,12 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="ko">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased w-full sm:w-2/3 mx-auto`}>
+      <body className={`antialiased w-full sm:w-2/3 mx-auto`}>
         <NavHead />
+        <Category />
+        <Category />
+        <HorizontalArticleList />
+        <LinearArticleList />
       </body>
     </html>
   )

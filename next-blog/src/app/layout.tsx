@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
-import NavHead from "@/containers/NavHead/NavHead";
+import NavHead from "@/containers/GreetPage/components/NavHead/NavHead";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import '@/app/globals.css';
-import Category from "@/containers/Category/Category";
-import HorizontalArticleList from "@/containers/HorizontalArticleList/HorizontalArticleList";
-import LinearArticleList from "@/containers/LinearArticleList/LinearArticleList";
+import Category from "@/containers/GreetPage/components/Category/Category";
+import HorizontalArticleList from "@/containers/GreetPage/components/HorizontalArticleList/HorizontalArticleList";
+import LinearArticleList from "@/containers/GreetPage/components/LinearArticleList/LinearArticleList";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,10 +27,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
     <html lang="ko">
       <body className={`antialiased w-full sm:w-2/3 mx-auto`}>
         <NavHead />
-        <Category />
-        <Category />
-        <HorizontalArticleList />
-        <LinearArticleList />
+        <main>{children}</main>
       </body>
     </html>
   )

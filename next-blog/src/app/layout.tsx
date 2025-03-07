@@ -3,7 +3,7 @@ import NavHead from "@/containers/GreetPage/components/NavHead/NavHead";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import '@/app/globals.css';
-import Category from "@/containers/GreetPage/components/Category/Category";
+import Category from "@/containers/GreetPage/components/TagSection/TagSection";
 import HorizontalArticleList from "@/containers/GreetPage/components/HorizontalArticleList/HorizontalArticleList";
 import LinearArticleList from "@/containers/GreetPage/components/LinearArticleList/LinearArticleList";
 

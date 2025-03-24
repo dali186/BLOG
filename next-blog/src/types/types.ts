@@ -11,7 +11,6 @@ export interface Member {
 export interface Article {
   id: string | ObjectId;
   slug: string;
-  title: string;
   category?: string;
   tags: string[];
   content: string;

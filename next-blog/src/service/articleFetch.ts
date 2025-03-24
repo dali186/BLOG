@@ -7,7 +7,7 @@ import { Article } from "@/types/types";
     @param {string} slug (게시글 제목)
     @returns {Article | null}
 */
-export const getAllAtricles = async ( slug: string ): Promise<Article[]> => {
+export const getAllAtricles = async ( slug?: string ): Promise<Article[]> => {
     try {
         const client = await clientPromise;
         const db = client.db(process.env.MONGODB_NAME);

@@ -18,4 +18,5 @@ export interface Article {
   createdAt: Date;
   updatedAt: Date;
   authorId: string | ObjectId; // member FK
+  authorName: string;
 }

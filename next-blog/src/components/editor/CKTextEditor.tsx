@@ -26,6 +26,13 @@ function CKTextEditor() {
         ],
         placeholder: '생각을 정리하고 공유해보세요...'
       }}
+      onReady={(editor) => {
+        editor.editing.view.change((writer) => {
+          writer.setStyle(
+            'height', '200px', editor.editing.view.document.getRoot()
+          )
+        })
+      }}
     />
   );
 }

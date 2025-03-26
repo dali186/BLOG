@@ -20,3 +20,9 @@ export interface Article {
   authorId: string | ObjectId; // member FK
   authorName: string;
 }
+
+export interface Category {
+  _id: string;
+  name: string;
+  parentId?: string;
+}

@@ -85,6 +85,22 @@ export const addArticle = async ( article: Article ) => {
     }
 }
 
+/*
+    카테고리 리스트 조회
+
+    @param
+    @returns {string[] | null}
+*/
+export const getCategories = async () => {
+    try{
+        const client = await clientPromise;
+        const db = client.db(process.env.MONGODB_NAME);
+        
+    } catch (err: any) {
+        throw new Error(err.message);
+    }
+}
+
 /* 
     태그 리스트 조회 
     

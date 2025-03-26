@@ -5,8 +5,10 @@ import CKTextEditorWrapper from "../editor/CKEditor/CKTextEditorWrapper";
 import EditorTitle from "../editor/EditorTitle";
 import Footer from "../editor/EditorFooter";
 import { Article } from "@/types/types";
+import { useRouter } from "next/navigation";
 
 const ArticleForm = () => {
+    const router = useRouter();
     const [slug, setSlug] = useState('');
     const [content, setContent] = useState('');
 
@@ -29,6 +31,7 @@ const ArticleForm = () => {
             });
             if (response.ok) {
                 console.log('아티클 업로드 완료', newArticle);
+                router.push(`/articles/${newArticle.slug}`);
             } else {
                 console.error('아티클 업로드 실패 ', await response.text());
             }

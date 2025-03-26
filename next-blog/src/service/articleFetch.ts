@@ -44,3 +44,23 @@ export const getArticle = async ( slug: string ): Promise<Article> => {
         throw new Error(err.message);
     }
 }
+
+/*
+    게시글 작성
+
+    @param {Article} article
+    @returns {Article | null}
+*/
+export const addArticle = async ( article: Article ) => {
+    try {
+        const client = await clientPromise;
+        const db = client.db(process.env.MONGODB_NAME);
+        const result = await db.collection('articles').insertOne({
+            ...article
+        });
+
+        return result;
+    } catch (err: any) {
+        throw new Error(err.message);
+    }
+}

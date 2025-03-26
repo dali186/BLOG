@@ -9,7 +9,7 @@ export interface Member {
 }
 
 export interface Article {
-  id: string | ObjectId;
+  id?: string | ObjectId;
   slug: string;
   category?: string;
   tags: string[];

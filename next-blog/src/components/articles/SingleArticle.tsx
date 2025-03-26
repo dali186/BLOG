@@ -21,8 +21,9 @@ const SingleArticle = ({ article }: SingleArticleProps) => {
         <span>{articleDate + ' ' + articleTime}</span>
       </div>
       <hr className='mt-2 mb-4'/>
-      <div className="px-5 w-full mx-auto">
-        {article?.content}
+      <div className="px-5 w-full mx-auto"
+          dangerouslySetInnerHTML={{ __html: article?.content || '' }}
+      >
       </div>
     </div>
   );

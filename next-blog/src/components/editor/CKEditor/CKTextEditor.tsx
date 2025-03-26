@@ -1,5 +1,3 @@
-'use client';
-
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import {
   ClassicEditor, Autosave, BlockQuote, Code, FontBackgroundColor, FontColor, FontFamily, FontSize, Heading, Highlight, ImageEditing, ImageUtils, Indent, IndentBlock,
@@ -7,10 +5,14 @@ import {
 } from 'ckeditor5';
 import 'ckeditor5/ckeditor5.css';
 
-function CKTextEditor() {
+function CKTextEditor({ onChange }: { onChange: (value: string) => void }) {
   return (
     <CKEditor
       editor={ClassicEditor}
+      onChange={(event, editor) => {
+        const data = editor.getData();
+        onChange(data);
+      }}
       config={{
         licenseKey: 'GPL',
         plugins: [
@@ -20,7 +22,7 @@ function CKTextEditor() {
         toolbar: [
           'heading', '|',
           'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
-          'bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', 'code', 'removeFormat', '|',
+          'strikethrough', 'subscript', 'superscript', 'code', 'removeFormat', '|',
           'link', 'insertTable', 'highlight', 'blockQuote', '|',
           'outdent', 'indent'
         ],
@@ -28,9 +30,10 @@ function CKTextEditor() {
       }}
       onReady={(editor) => {
         editor.editing.view.change((writer) => {
-          writer.setStyle(
-            'height', '200px', editor.editing.view.document.getRoot()
-          )
+          const rootElement = editor.editing.view.document.getRoot();
+          if (rootElement) {
+            writer.setStyle('min-height', '80vh', rootElement);
+          }
         })
       }}
     />

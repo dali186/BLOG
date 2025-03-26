@@ -1,11 +1,13 @@
 import VerticalArticleCardList from "@/components/articles/VerticalArticleCardList";
 import Loader from "@/components/Loader";
-import { getAllAtricles } from "@/service/articleFetch";
+import { getAllAtricles, getArticlesByTag } from "@/service/articleFetch";
 import { Article } from "@/types/types";
 import { Suspense } from "react";
 
-export default async() => {
-    const articles: Article[] = await getAllAtricles();
+export default async({ params }: { params: Promise<{ tagName: string }> }) => {
+    const tagName = (await params).tagName;
+    const decodedTagName = decodeURIComponent(tagName);
+    const articles: Article[] = await getArticlesByTag(decodedTagName);
 
     return(
         <Suspense fallback={<Loader />}>

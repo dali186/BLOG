@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="ko">
-      <body className={`antialiased w-full sm:w-2/3 mx-auto`}>
+      <body className="antialiased w-full xl:w-1/2 mx-auto">
         <Header />
         <main>{children}</main>
       </body>

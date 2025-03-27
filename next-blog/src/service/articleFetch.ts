@@ -1,5 +1,5 @@
 import clientPromise from "@/utils/db/mongod";
-import { Article } from "@/types/types";
+import { Article, Category } from "@/types/types";
 
 /*
     게시글 리스트 조회
@@ -91,11 +91,13 @@ export const addArticle = async ( article: Article ) => {
     @param
     @returns {string[] | null}
 */
-export const getCategories = async () => {
+export const getCategories = async (): Promise<Category[]> => {
     try{
         const client = await clientPromise;
         const db = client.db(process.env.MONGODB_NAME);
-        
+        const categories = await db.collection<Category>('category').find().toArray();
+
+        return categories;        
     } catch (err: any) {
         throw new Error(err.message);
     }

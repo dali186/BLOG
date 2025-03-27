@@ -22,7 +22,7 @@ export interface Article {
 }
 
 export interface Category {
-  _id: string;
+  _id: number;
   name: string;
-  parentId?: string;
+  parentId?: number;
 }

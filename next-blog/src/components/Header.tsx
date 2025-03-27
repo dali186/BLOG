@@ -1,0 +1,23 @@
+const Header = () => {
+    return (
+      <header className="bg-white">
+        <div className="container mx-auto flex items-center justify-between p-4">
+          {/* 로고 */}
+          <div className="flex items-center">
+            <a href="/" className="gh-head-logo">
+              <img src="/images/logo.png" alt="MainLogo" className="h-8" />
+            </a>
+          </div>
+
+          <div className="text-xs sm:text-base flex items-center space-x-1">
+            <a href="/articles/write" className="text-gray-700 hover:text-blue-500 font-noto">Write</a>
+            <p>•</p>
+            <a href="/signup" className="text-gray-700 hover:text-blue-500 font-noto">Signin</a>
+          </div>
+        </div>
+      </header>
+    );
+  };
+  
+  export default Header;
+  

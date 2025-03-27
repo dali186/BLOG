@@ -1,13 +1,11 @@
 import { ObjectId } from 'mongodb';
 
 export interface Member {
-  sn: string | ObjectId;
+  sn?: string | ObjectId;
   memberName: string;
-  memberId: string,
   memberPwd: string,
   memberAlias: string,
-  email?: string;
-  birthday?: Date;
+  email: string;
 }
 
 export interface Article {

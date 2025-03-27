@@ -1,4 +1,4 @@
-import clientPromise from "@/utils/db/mongod";
+import clientPromise from "@/lib/db/mongod";
 import { Article, Category } from "@/types/types";
 
 /*

@@ -1,17 +1,17 @@
 import { Member } from "@/types/types"
-import clientPromise from "@/utils/db/mongod"
+import clientPromise from "@/lib/db/mongod"
 
 /*
     사용자 조회
 
-    @param {Member} member (게시글 제목)
+    @param {email} string (게시글 제목)
     @returns {Member | null}
  */
-export const getMember = async ( memberSn: number): Promise<Member> => {
+export const getMember = async ( email: string): Promise<Member> => {
     try {
         const client = await clientPromise;
         const db = client.db(process.env.MONGODB_NAME);
-        const member: Member | null = await db.collection<Member>('member').findOne({ memberSn });
+        const member: Member | null = await db.collection<Member>('member').findOne({ email });
 
         if (!member) {
             throw new Error('해당 사용자를 찾을 수 없습니다.');

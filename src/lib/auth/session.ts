@@ -1,4 +1,5 @@
-import { SessionPayload } from '@/types/types';
+import { getMember } from '@/service/memberFetch';
+import { Member, SessionPayload } from '@/types/types';
 import { jwtVerify, SignJWT } from 'jose';
 import { cookies } from 'next/headers';
 import 'server-only';
@@ -69,4 +70,20 @@ export const verifySession = async () => {
 
     return !session?.userEmail ? { isLoggedIn: false } : { isLoggedIn: true, userEmail: session.userEmail };
 
+}
+
+export const getMemberInfo = async (): Promise<Member | null> => {
+    const session = await verifySession();
+
+    if (!session) return null;
+   
+    try {
+      const member = await getMember('email', session.userEmail as string);   
+
+      return member;
+    } catch (error) {
+      console.log('사용자 정보 조회 실패');
+
+      return null;
+    }
 }

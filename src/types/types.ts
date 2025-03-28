@@ -16,7 +16,6 @@ export interface Article {
   category?: string;
   tags: string[];
   content: string;
-  thumbnail?: string;
   createdAt: Date;
   updatedAt: Date;
   authorId: string | ObjectId; // member FK

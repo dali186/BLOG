@@ -1,11 +1,13 @@
+import { JWTPayload } from 'jose';
 import { ObjectId } from 'mongodb';
 
 export interface Member {
-  id: string | ObjectId;
-  userName: string;
-  thumbnail?: string;
-  email?: string;
-  profileUrl?: string;
+  sn?: string | ObjectId;
+  email: string;
+  memberName: string;
+  memberPwd: string;
+  memberAlias: string;
+  memberRole: string;
 }
 
 export interface Article {
@@ -25,4 +27,9 @@ export interface Category {
   _id: number;
   name: string;
   parentId?: number;
+}
+
+export interface SessionPayload extends JWTPayload {
+  userEmail: string;
+  expiresAt: Date;
 }

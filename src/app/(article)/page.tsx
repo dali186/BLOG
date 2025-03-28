@@ -3,7 +3,7 @@ import CategorySection from "@/components/main/CategorySection";
 import TagSection from "@/components/main/TagSection";
 
 
-const Home = async() => {  
+const ArticleHome = async() => {  
   return (
     <div className='p-6 pt-1'>
       <TagSection />
@@ -13,4 +13,4 @@ const Home = async() => {
   );
 }
 
-export default Home;
+export default ArticleHome;

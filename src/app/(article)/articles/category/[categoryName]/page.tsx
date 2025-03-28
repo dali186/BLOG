@@ -4,10 +4,10 @@ import { getArticlesByCond } from "@/service/articleFetch";
 import { Article } from "@/types/types";
 import { Suspense } from "react";
 
-export default async({ params }: { params: Promise<{ tagName: string }> }) => {
-    const tagName = (await params).tagName;
-    const decodedTagName = decodeURIComponent(tagName);
-    const articles: Article[] = await getArticlesByCond('tags', decodedTagName);
+export default async({ params }: { params: Promise<{ categoryName: string }> }) => {
+    const categoryName = (await params).categoryName;
+    const decodedcategoryName = decodeURIComponent(categoryName);
+    const articles: Article[] = await getArticlesByCond('category', decodedcategoryName);
 
     return(
         <Suspense fallback={<Loader />}>

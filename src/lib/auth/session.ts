@@ -21,7 +21,7 @@ export const decryptJWT = async(session: string | undefined = '') => {
         })
         return payload;
     } catch (error) {
-        console.log('JWT 복호화에 실패하였습니다.');
+        console.log('JWT이 존재하지 않거나나 복호화에 실패하였습니다.');
     }
 }
 
@@ -61,4 +61,12 @@ export const updateSession = async() => {
 export const deleteSession = async () => {
   const cookieStore = await cookies()
   cookieStore.delete('session')
+}
+
+export const verifySession = async () => {
+    const cookie = (await cookies()).get('session')?.value;
+    const session = await decryptJWT(cookie);
+
+    return !session?.userEmail ? { isLoggedIn: false } : { isLoggedIn: true, userEmail: session.userEmail };
+
 }

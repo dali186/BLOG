@@ -22,22 +22,25 @@ export const getAllAtricles = async ( slug?: string ): Promise<Article[]> => {
 }
 
 /*
-    게시글 리스트 태그 조회
+    게시글 리스트 조건 조회
 
-    @param {string} tagName (태그이름)
+    @param {string} cond{type, value} (조건)
     @returns {Article[] | null}
 */
-export const getArticlesByTag = async ( tagName?: string ): Promise<Article[]> => {
+export const getArticlesByCond = async ( type: string, value: string ): Promise<Article[]> => {
     try {
         const client = await clientPromise;
         const db = client.db(process.env.MONGODB_NAME);
-        const query = tagName ? { tags: { $in: [tagName] } } : {};
 
-        const articles: Article[] = await db.collection<Article>('articles').find(query).toArray();
+        let cond: any = {};
+        if (type === 'category') { cond = { category: value }} 
+        else if (type === 'tags') { cond = { tags: { $in: [value] } } }
+
+        const articles: Article[] = await db.collection<Article>('articles').find(cond).toArray();
 
         return articles;
     } catch (err: any)  {
-        throw new Error(`Slug '${tagName}'에 해당하는 Article을 찾을 수 없습니다.`)
+        throw new Error(`Slug '${value}'에 해당하는 Article을 찾을 수 없습니다.`)
     }
 }
 

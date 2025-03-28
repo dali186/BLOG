@@ -1,4 +1,8 @@
-const Header = () => {
+import { verifySession } from "@/lib/auth/session";
+import SignOutHref from "./atoms/SignOutHref";
+
+const Header = async() => {
+  const isLoggedIn = (await verifySession()).isLoggedIn;
     return (
       <header className="bg-white">
         <div className="container mx-auto flex items-center justify-between p-4">
@@ -10,14 +14,20 @@ const Header = () => {
           </div>
 
           <div className="text-xs sm:text-base flex items-center space-x-1">
-            <a href="/articles/write" className="text-gray-700 hover:text-blue-500 font-noto">Write</a>
-            <p>•</p>
-            <a href="/signin" className="text-gray-700 hover:text-blue-500 font-noto">Signin</a>
+            {!isLoggedIn ? (
+              <a href="/signin" className="text-gray-700 hover:text-blue-500 font-noto">Signin</a>
+            ) : (
+              <>
+                <a href="/articles/write" className="text-gray-700 hover:text-blue-500 font-noto">Write</a>
+                  <p>•</p>
+                <SignOutHref />
+              </>
+            )}
           </div>
         </div>
       </header>
     );
   };
-  
+
   export default Header;
   

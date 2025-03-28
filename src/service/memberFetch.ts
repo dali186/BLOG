@@ -7,12 +7,18 @@ import clientPromise from "@/lib/db/mongod"
     @param {email} string (게시글 제목)
     @returns {Member | null}
  */
-export const getMember = async ( email: string): Promise<Member> => {
+export const getMember = async (type: string, value: string): Promise<Member> => {
     try {
         const client = await clientPromise;
         const db = client.db(process.env.MONGODB_NAME);
-        const member: Member | null = await db.collection<Member>('member').findOne({ email });
 
+        let cond: any = {};
+        if (type === 'email') { cond = { email: value } }
+        else if (type === 'sn') { cond = { sn: value } }
+        else { throw new Error('유효하지 않은 속성입니다.') }
+
+        const member: Member | null = await db.collection<Member>('member').findOne(cond);
+        console.log(member);
         if (!member) {
             throw new Error('해당 사용자를 찾을 수 없습니다.');
         }
@@ -22,16 +28,6 @@ export const getMember = async ( email: string): Promise<Member> => {
         throw new Error(err.message);
     }
 }
-
-/*
-    사용자 조건 조회
-
-    @param {Member} member (게시글 제목)
-    @returns {Member | null}
- */
-    export const getMemberBySn = () => {
-    
-    }
 
 /*
     사용자 전체 조회

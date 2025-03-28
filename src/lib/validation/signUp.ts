@@ -25,7 +25,7 @@ export const SignUpFormSchema = z.object({
     path: ["confirmPassword"], 
   });
  
-export type FormState =
+export type SignUpFormState =
   | {
       errors?: {
         name?: string[]

@@ -1,11 +1,17 @@
+'use client';
+
+import { signIn } from "@/app/actions/auth";
+import { useActionState } from "react";
+
 const LoginPage = () => { 
+  const [state, action, pending] = useActionState(signIn, undefined);
 
   return (
     <div className='p-6 pt-1'>
-      <div className="w-full min-h-screen bg-gray-50 flex flex-col sm:justify-center items-center sm:pt-0">
+      <div className="w-full min-h-screen flex flex-col sm:justify-center items-center sm:pt-0">
         <div className="w-full sm:max-w-md p-5 mx-auto">
           <h2 className="mb-12 text-center text-5xl font-extrabold">Welcome.</h2>
-          <form>
+          <form action={action}>
             <div className="mb-4">
               <label className="block mb-1" htmlFor="email">이메일</label>
               <input id="email" type="text" name="email" className="py-2 px-3 border border-gray-300 focus:border-emerald-300 focus:outline-none focus:ring focus:ring-emerald-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
@@ -14,6 +20,12 @@ const LoginPage = () => {
               <label className="block mb-1" htmlFor="password">비밀번호</label>
               <input id="password" type="password" name="password" className="py-2 px-3 border border-gray-300 focus:border-emerald-300 focus:outline-none focus:ring focus:ring-emerald-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
             </div>
+            {state?.errors?.email && (
+              <p className="text-red-500 mb-4" aria-live="polite">
+                {state.errors.email[0]}
+              </p>
+            )}
+
             <div className="mt-6 flex items-center justify-between">
               <div className="flex items-center">
                 <input id="remember_me" type="checkbox" className="border border-gray-300 text-emerald-600 shadow-sm focus:border-emerald-300 focus:ring focus:ring-emerald-200 focus:ring-opacity-50" />

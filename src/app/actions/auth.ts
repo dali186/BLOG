@@ -62,6 +62,7 @@ export const signUp = async(formState: SignUpFormState, formData: FormData) => {
         memberName: name,
         memberPwd: encryptedPwd,
         memberAlias: alias,
+        memberRole: 'user'
     };
     
     // 사용자 추가

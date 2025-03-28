@@ -5,8 +5,9 @@ export interface Member {
   sn?: string | ObjectId;
   email: string;
   memberName: string;
-  memberPwd: string,
-  memberAlias: string,
+  memberPwd: string;
+  memberAlias: string;
+  memberRole: string;
 }
 
 export interface Article {

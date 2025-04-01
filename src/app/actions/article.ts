@@ -15,6 +15,7 @@ export const addArticleAction = async (formData: FormData) => {
         slug: formData.get('slug') as string,
         category: formData.get('category') as string,
         content: formData.get('content') as string,
+        description: formData.get('description') as string,
         tags: [],
         authorId: member.email,
         authorName: member.memberName,
@@ -24,5 +25,5 @@ export const addArticleAction = async (formData: FormData) => {
     console.log(article);
     // 3. 저장
     await addArticle(article);
-    redirect(`/article/${formData.get('slug')}`);
+    redirect('/articles');
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decryptJWT } from "./lib/auth/session";
+import { decryptJWT } from "../lib/auth/session";
 
 // 1. 접근 제한 경로 설정
 const authRequireRoutes = ["/articles/write"];
@@ -21,5 +21,5 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: ["/articles/write"],
 };

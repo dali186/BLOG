@@ -89,6 +89,38 @@ export const addArticle = async ( article: Article ) => {
 }
 
 /*
+    게시글 임시 저장
+
+    @param {Formdata} formdata
+    @returns {Article | null}
+*/
+export const addArticleTemp = async ( formData: FormData ) => {
+    try {
+        const client = await clientPromise;
+        const db = client.db(process.env.MONGODB_NAME);
+
+        const tempArticle: Article = {
+            slug: formData.get('slug') as string,
+            description: formData.get('description') as string,
+            category: formData.get('category') as string,
+            tags: [],
+            content: formData.get('content') as string,
+            authorId: formData.get('authorId') as string,
+            authorName: formData.get('authorName') as string,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+        await db.collection('articleTemp').insertOne({
+            ...tempArticle
+        })
+
+        return tempArticle;
+    } catch (err: any) {
+        throw new Error(err.message);
+    }
+}
+
+/*
     카테고리 리스트 조회
 
     @param

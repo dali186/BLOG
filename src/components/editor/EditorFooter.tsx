@@ -1,6 +1,7 @@
 import { convertTree } from "@/lib/util/util";
 import { getCategories } from "@/service/articleFetch";
 import { Category } from "@/types/types";
+import EditorTempButton from "./EditorTempButton";
 
 interface TreeCategory extends Category {
   children?: TreeCategory[];
@@ -20,7 +21,6 @@ const EditorFooter = async() => {
                 id="category"
                 className="block px-4 py-2 bg-white border-2 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-gray-800 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-teal-400 dark:focus:border-teal-400 transition-all ease-in-out font-dot"
                 defaultValue=""
-                required
             >
                 <option value="" disabled>카테고리 선택</option>
                 {categoryTreeList.map(tree => {
@@ -45,12 +45,7 @@ const EditorFooter = async() => {
             </select>
 
             <div className="flex gap-4">
-                <button
-                    type="submit"
-                    className="inline-flex items-center gap-2 rounded-full border border-[#000000] px-6 py-2 text-sm font-semibold text-[#000000] transition-all hover:rotate-3 hover:scale-105 hover:shadow-lg active:scale-95 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none font-dot"
-                >
-                    임시저장
-                </button>
+                <EditorTempButton />
                 <button
                     className="inline-flex items-center gap-2 rounded-full border border-[#000000] px-6 py-2 text-sm font-semibold text-[#000000] transition-all hover:bg-[#000000] hover:text-white hover:shadow-lg active:scale-95 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none font-dot"
                 >

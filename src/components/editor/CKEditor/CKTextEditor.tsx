@@ -36,7 +36,7 @@ function CKTextEditor() {
           editor.editing.view.change((writer) => {
             const rootElement = editor.editing.view.document.getRoot();
             if (rootElement) {
-              writer.setStyle('min-height', '80vh', rootElement);
+              writer.setStyle('min-height', '75vh', rootElement);
             }
           })
         }}

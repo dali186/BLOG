@@ -33,6 +33,7 @@ jobs:
           script: |
             echo "${{ secrets.DOCKER_PWD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
             cd /BLOG
+            cp ./secrets/.env.local ./next
             docker compose down || true
             docker image prune -f
             docker pull ${{ secrets.DOCKER_USER }}/next-blog:latest

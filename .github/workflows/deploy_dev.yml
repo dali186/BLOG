@@ -14,7 +14,7 @@ jobs:
       - name: Set env
         run: |
           touch ./.env.local
-          echo "${{ secrets.NODE_ENV }}" > ./.env.local
+          echo "${{ secrets.NODE_ENV }}" > ./next/.env.local
         shell: bash
 
       - name: Build Next

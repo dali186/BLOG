@@ -6,10 +6,11 @@ import { Suspense } from "react";
 
 export default async() => {
     const articles: Article[] = await getAllAtricles();
+    const type = 'all';
 
     return(
         <Suspense fallback={<Loader />}>
-            <VerticalArticleCardList articles={articles} />
+            <VerticalArticleCardList articles={articles} type={type} />
         </Suspense>
     )
 }

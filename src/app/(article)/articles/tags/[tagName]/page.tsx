@@ -8,10 +8,11 @@ export default async({ params }: { params: Promise<{ tagName: string }> }) => {
     const tagName = (await params).tagName;
     const decodedTagName = decodeURIComponent(tagName);
     const articles: Article[] = await getArticlesByCond('tags', decodedTagName);
+    const type = 'Tag';
 
     return(
         <Suspense fallback={<Loader />}>
-            <VerticalArticleCardList articles={articles} />
+            <VerticalArticleCardList articles={articles} type={type} value={decodedTagName} />
         </Suspense>
     )
 }

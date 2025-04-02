@@ -26,7 +26,7 @@ const EditorFooter = async() => {
                 {categoryTreeList.map(tree => {
                     if (tree.children?.length === 0) {
                         return (
-                            <option key={tree._id} value={tree._id}>
+                            <option key={tree._id} value={tree.name}>
                                 {tree.name}
                             </option>
                         );
@@ -34,7 +34,7 @@ const EditorFooter = async() => {
                         return (
                             <optgroup key={tree._id} label={tree.name}>
                                 {tree.children?.map(child => 
-                                    <option key={child._id} value={child._id}>
+                                    <option key={child._id} value={child.name}>
                                         {child.name}
                                     </option>
                                 )}

@@ -3,7 +3,8 @@ import { Category } from "@/types/types";
 interface TreeCategory extends Category {
     children?: TreeCategory[];
   }
-  
+
+/* 카테고리를 트리구조로 변환해주는 메소드드 */
 export const convertTree = (categoryList: Category[]) => {
   const categoryMap = new Map<number,TreeCategory>();
   const root: TreeCategory[] = [];
@@ -21,4 +22,11 @@ export const convertTree = (categoryList: Category[]) => {
     }
   });
   return root;
+}
+
+/* 태그 string을 배열로 변환하는 메서드 */
+export const separateTags = (tags: string) => {
+  const tagList = tags.split(',').map(tag => tag.trim());
+
+  return tagList;
 }

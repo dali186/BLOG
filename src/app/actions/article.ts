@@ -1,6 +1,7 @@
 'use server';
 
 import { getMemberInfo } from "@/lib/auth/session"
+import { separateTags } from "@/lib/util/util";
 import { addArticle } from "@/service/articleFetch";
 import { Article, Member } from "@/types/types"
 import { redirect } from "next/navigation";
@@ -16,7 +17,7 @@ export const addArticleAction = async (formData: FormData) => {
         category: formData.get('category') as string,
         content: formData.get('content') as string,
         description: formData.get('description') as string,
-        tags: [],
+        tags: separateTags(formData.get('tag') as string),
         authorId: member.email,
         authorName: member.memberName,
         createdAt: new Date(),

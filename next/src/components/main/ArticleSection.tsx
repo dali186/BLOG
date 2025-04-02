@@ -14,7 +14,7 @@ const ArticleSection = async() => {
             </div>
             <div>
             <Suspense fallback={<Loader />}>
-                <VerticalArticleCardList articles={articles} />
+                <VerticalArticleCardList articles={articles} type=""/>
             </Suspense>
             </div>
         </div>

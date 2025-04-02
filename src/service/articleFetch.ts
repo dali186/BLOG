@@ -1,5 +1,8 @@
 import clientPromise from "@/lib/db/mongod";
 import { Article, Category } from "@/types/types";
+import { mkdir, writeFile } from "fs/promises";
+import path from "path";
+import fs from "fs";
 
 /*
     게시글 리스트 조회
@@ -158,4 +161,30 @@ export const getTags = async () => {
     } catch (err: any) {
         throw new Error(err.message);
     }
+}
+
+/*
+    에디터 이미지 업로드
+
+    @param File
+    @returns {string}
+*/
+export const uploadEditorImage = async(image: File) => {
+    if (!image) { throw new Error('이미지가 없습니다.'); }
+    
+    const ext = path.extname(image.name);
+    const imgName = `${Date.now()}${ext}`;
+    const uploadPath = path.join(process.cwd(), process.env.IMG_STORE_PATH as string);
+
+    if (!fs.existsSync(uploadPath)) {
+        await mkdir(uploadPath, { recursive: true });
+    }
+
+    const imgPath = path.join(uploadPath, imgName);
+    const buffer = Buffer.from(await image.arrayBuffer());
+    await writeFile(imgPath, buffer);
+
+    const imageUrl = `/uploads/${imgName}`;
+
+    return imageUrl;
 }

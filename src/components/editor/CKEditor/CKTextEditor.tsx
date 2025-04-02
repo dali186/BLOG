@@ -1,10 +1,12 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import {
-  ClassicEditor, Autosave, BlockQuote, Code, FontBackgroundColor, FontColor, FontFamily, FontSize, Heading, Highlight, ImageEditing, ImageUtils, Indent, IndentBlock,
-  Link, RemoveFormat, Strikethrough, Subscript, Superscript, Table, TableCaption, TableCellProperties, TableColumnResize, TableProperties, TableToolbar, WordCount
+  ClassicEditor, Undo, Autosave, BlockQuote, Code, FontBackgroundColor, FontColor, FontFamily, FontSize, Heading, Highlight, Indent, IndentBlock,
+  Link, RemoveFormat, Strikethrough, Subscript, Superscript, Table, TableCaption, TableCellProperties, TableColumnResize, TableProperties, TableToolbar, WordCount, FileRepository,
+  Image, ImageEditing, ImageUpload, ImageUploadUI, ImageUploadProgress, Clipboard
 } from 'ckeditor5';
 import 'ckeditor5/ckeditor5.css';
 import { useState } from 'react';
+import { EditorImageUploadAdapterPlugin } from './imgAdapter/UploadAdapter';
 
 function CKTextEditor() {
   const [editorContent, setEditorContent] = useState();
@@ -20,15 +22,17 @@ function CKTextEditor() {
         config={{
           licenseKey: 'GPL',
           plugins: [
-            Autosave, BlockQuote, Code, FontBackgroundColor, FontColor, FontFamily, FontSize, Heading, Highlight, ImageEditing, ImageUtils, Indent, IndentBlock,
-            Link, RemoveFormat, Strikethrough, Subscript, Superscript, Table, TableCaption, TableCellProperties, TableColumnResize, TableProperties, TableToolbar, WordCount
+            Autosave, Undo, BlockQuote, Code, FontBackgroundColor, FontColor, FontFamily, FontSize, Heading, Highlight, Indent, IndentBlock,
+            Link, RemoveFormat, Strikethrough, Subscript, Superscript, Table, TableCaption, TableCellProperties, TableColumnResize, TableProperties, TableToolbar, WordCount,
+            FileRepository, Image, ImageEditing, ImageUpload, ImageUploadUI, ImageUploadProgress, Clipboard
           ],
+          extraPlugins: [EditorImageUploadAdapterPlugin],
           toolbar: [
-            'heading', '|',
-            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
+            'undo', 'redo', '|',
+            'fontSize', 'fontColor', 'fontBackgroundColor', 'highlight', 'imageUpload', '|',
+            'insertTable', 'code', 'link', 'blockQuote', '|',
+            'outdent', 'indent', '|',
             'strikethrough', 'subscript', 'superscript', 'code', 'removeFormat', '|',
-            'link', 'insertTable', 'highlight', 'blockQuote', '|',
-            'outdent', 'indent'
           ],
           placeholder: '생각을 정리하고 공유해보세요...'
         }}

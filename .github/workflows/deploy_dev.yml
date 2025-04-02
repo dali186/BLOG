@@ -42,4 +42,4 @@ jobs:
             docker compose down || true
             docker image prune -f
             docker pull ${{ secrets.DOCKER_USER }}/next-blog:latest
-            docker compose up --build -d
+            docker compose up -d

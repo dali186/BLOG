@@ -1,10 +1,10 @@
-sevices:
+services:
   nginx:
-    image: nignx: latest
+    image: nginx:latest
     ports:
       - "80:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - next
     networks:
@@ -12,11 +12,11 @@ sevices:
 
   next:
     build:
-      context: ./nextjs
+      context: ./next
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    enviroment:
+    environment:
       - NODE_ENV=production
     depends_on:
       - mongo

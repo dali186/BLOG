@@ -19,6 +19,7 @@ jobs:
 
       - name: Build Next
         run: |
+          cd ./next
           npm install
           npm run build
         shell: bash

@@ -4,7 +4,7 @@ import SignOutHref from "./atoms/SignOutHref";
 const Header = async() => {
   const isLoggedIn = (await verifySession()).isLoggedIn;
     return (
-      <header className="bg-white">
+      <header>
         <div className="container mx-auto flex items-center justify-between p-4">
           {/* 로고 */}
           <div className="flex items-center">

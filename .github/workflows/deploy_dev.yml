@@ -27,7 +27,7 @@ jobs:
       - name: Login dockerHub
         run: |
           echo "${{ secrets.DOCKER_PWD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
-          docker build -t ${{ secrets.DOCKER_USER }}/next-blog . 
+          docker build -t ${{ secrets.DOCKER_USER }}/next-blog ./next 
           docker push ${{ secrets.DOCKER_USER }}/next-blog:latest
       
       - name: Deploy

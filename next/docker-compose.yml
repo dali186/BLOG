@@ -1,0 +1,40 @@
+sevices:
+  nginx:
+    image: nignx: latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - next
+    networks:
+      - next-network
+
+  next:
+    build:
+      context: ./nextjs
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    enviroment:
+      - NODE_ENV=production
+    depends_on:
+      - mongo
+    networks:
+      - next-network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - next-network
+
+volumes:
+  mongo-data:
+
+networks:
+  next-network:
+    driver: bridge

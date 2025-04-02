@@ -17,13 +17,6 @@ jobs:
           echo "${{ secrets.NODE_ENV }}" > ./next/.env.local
         shell: bash
 
-      - name: Build Next
-        run: |
-          cd ./next
-          npm install
-          npm run build
-        shell: bash
-
       - name: Login dockerHub
         run: |
           echo "${{ secrets.DOCKER_PWD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin

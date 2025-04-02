@@ -1,5 +1,8 @@
 import clientPromise from "@/lib/db/mongod";
 import { Article, Category } from "@/types/types";
+import { mkdir, writeFile } from "fs/promises";
+import path from "path";
+import fs from "fs";
 
 /*
     게시글 리스트 조회
@@ -22,22 +25,25 @@ export const getAllAtricles = async ( slug?: string ): Promise<Article[]> => {
 }
 
 /*
-    게시글 리스트 태그 조회
+    게시글 리스트 조건 조회
 
-    @param {string} tagName (태그이름)
+    @param {string} cond{type, value} (조건)
     @returns {Article[] | null}
 */
-export const getArticlesByTag = async ( tagName?: string ): Promise<Article[]> => {
+export const getArticlesByCond = async ( type: string, value: string ): Promise<Article[]> => {
     try {
         const client = await clientPromise;
         const db = client.db(process.env.MONGODB_NAME);
-        const query = tagName ? { tags: { $in: [tagName] } } : {};
 
-        const articles: Article[] = await db.collection<Article>('articles').find(query).toArray();
+        let cond: any = {};
+        if (type === 'category') { cond = { category: value }} 
+        else if (type === 'tags') { cond = { tags: { $in: [value] } } }
+
+        const articles: Article[] = await db.collection<Article>('articles').find(cond).toArray();
 
         return articles;
     } catch (err: any)  {
-        throw new Error(`Slug '${tagName}'에 해당하는 Article을 찾을 수 없습니다.`)
+        throw new Error(`Slug '${value}'에 해당하는 Article을 찾을 수 없습니다.`)
     }
 }
 
@@ -86,6 +92,38 @@ export const addArticle = async ( article: Article ) => {
 }
 
 /*
+    게시글 임시 저장
+
+    @param {Formdata} formdata
+    @returns {Article | null}
+*/
+export const addArticleTemp = async ( formData: FormData ) => {
+    try {
+        const client = await clientPromise;
+        const db = client.db(process.env.MONGODB_NAME);
+
+        const tempArticle: Article = {
+            slug: formData.get('slug') as string,
+            description: formData.get('description') as string,
+            category: formData.get('category') as string,
+            tags: [],
+            content: formData.get('content') as string,
+            authorId: formData.get('authorId') as string,
+            authorName: formData.get('authorName') as string,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }
+        await db.collection('articleTemp').insertOne({
+            ...tempArticle
+        })
+
+        return tempArticle;
+    } catch (err: any) {
+        throw new Error(err.message);
+    }
+}
+
+/*
     카테고리 리스트 조회
 
     @param
@@ -123,4 +161,30 @@ export const getTags = async () => {
     } catch (err: any) {
         throw new Error(err.message);
     }
+}
+
+/*
+    에디터 이미지 업로드
+
+    @param File
+    @returns {string}
+*/
+export const uploadEditorImage = async(image: File) => {
+    if (!image) { throw new Error('이미지가 없습니다.'); }
+    
+    const ext = path.extname(image.name);
+    const imgName = `${Date.now()}${ext}`;
+    const uploadPath = path.join(process.cwd(), process.env.IMG_STORE_PATH as string);
+
+    if (!fs.existsSync(uploadPath)) {
+        await mkdir(uploadPath, { recursive: true });
+    }
+
+    const imgPath = path.join(uploadPath, imgName);
+    const buffer = Buffer.from(await image.arrayBuffer());
+    await writeFile(imgPath, buffer);
+
+    const imageUrl = `/uploads/${imgName}`;
+
+    return imageUrl;
 }

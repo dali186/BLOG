@@ -13,7 +13,12 @@ const ArticleVerticalCard = ({ article }: ArticleCardProps ) => {
                 {articleDate}
             </div>
             <h2 className="text-2xl font-noto mb-1">{article.slug}</h2>
-            <p className="text-gray-600 mb-6 line-clamp-3">{article.content}</p>
+            <p className="text-gray-600 mb-6 line-clamp-3">{article.description}</p>
+            <div className="whitespace-nowrap overflow-hidden text-ellipsis">
+                {article.tags.map((tag, index) => {
+                    return(<span key={index} className="italic mr-2 text-emerald-600"># {tag}</span>)
+                })}
+            </div>
             <div className="mt-3 flex justify-between">
                 <p className="text-bold"><span className="italic text-gray-500">written by </span>{article?.authorName}</p>
                 <a href={`/articles/${article.slug}`} className="text-emerald-600 inline-flex itmes-center"> 

@@ -1,6 +1,6 @@
 'use server';
 
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { SignUpFormState, SignUpFormSchema } from "@/lib/validation/signUp";
 import { SignInFormState, SignInFormSchema } from "@/lib/validation/signIn";
 import { Member } from "@/types/types";

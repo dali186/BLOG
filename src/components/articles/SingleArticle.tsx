@@ -11,7 +11,7 @@ const SingleArticle = ({ article }: SingleArticleProps) => {
   return (
     <div className='w-full md:w-9/10 mx-auto'>
       <div className='mx-5 my-3 text-sm'>
-        <a href="#" className='text-red-600 font-dot tracking-widest'>{article?.category}</a>
+        <a href={`/articles/category/${article?.category}`} className='text-red-600 font-dot tracking-widest'>{article?.category}</a>
       </div>
       <div className='w-full text-gray-800 text-4xl px-5 font-noto leading-none'>
         {article?.slug}

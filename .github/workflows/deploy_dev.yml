@@ -14,6 +14,8 @@ jobs:
       - name: Set env
         run: |
           touch ./.env.local
+          ls ./
+          ls ./next
           echo "${{ secrets.NODE_ENV }}" > ./next/.env.local
         shell: bash
 
@@ -33,6 +35,7 @@ jobs:
           script: |
             echo "${{ secrets.DOCKER_PWD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
             cd /BLOG
+            chmod 755 ./next
             cp ./secrets/.env.local ./next
             docker compose down || true
             docker image prune -f

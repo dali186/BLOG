@@ -3,6 +3,7 @@ import { Article, Category } from "@/types/types";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 import fs from "fs";
+import { BlobServiceClient } from "@azure/storage-blob";
 
 /*
     게시글 리스트 조회
@@ -187,4 +188,44 @@ export const uploadEditorImage = async(image: File) => {
     const imageUrl = `/uploads/${imgName}`;
 
     return imageUrl;
+}
+
+/*
+    에디터 이미지 업로드 with Azure Blob Storage
+
+    @param File
+    @returns {string}
+*/
+export const uploadEditorImageWithAzure = async(image: File) => {
+    if (!image) { throw new Error('이미지가 없습니다.'); }
+
+    const connStr = process.env.NEXT_PUBLIC_BLOB_CONN_STR;
+    const container = process.env.NEXT_PUBLIC_BLOB_CONTNR;
+
+    if (!connStr || !container) {
+        throw new Error('Azure Blob Storage 설정 누락');
+      }
+
+    try {
+        // BlobServiceClient 초기화
+        const blobServiceClient = BlobServiceClient.fromConnectionString(connStr as string);
+        const containerClient = blobServiceClient.getContainerClient(container as string);
+
+        // 파일명 생성
+        const fileName = `${Date.now()}-${image.name}`;
+        const blockBlobClient = containerClient.getBlockBlobClient(fileName);
+        
+        // File 객체를 ArrayBuffer로 변환하여 업로드
+        const arrayBuffer = await image.arrayBuffer();
+        await blockBlobClient.uploadData(arrayBuffer, {
+            blobHTTPHeaders: { blobContentType: image.type },
+        });
+
+        const imgUrl = `https://${blobServiceClient.accountName}.blob.core.windows.net/${container}/${fileName}`;
+
+        return imgUrl;
+    } catch (err: any) {
+        console.error('Azure Blob Storage 업로드 실패: ', err);
+        throw new Error('이미지 업로드 실패');
+    }
 }

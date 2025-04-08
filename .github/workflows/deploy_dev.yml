@@ -33,8 +33,7 @@ jobs:
           script: |
             sudo touch /BLOG/next/.env.local
             echo "${{ secrets.NODE_ENV }}" | sudo tee /BLOG/next/.env.local > /dev/null
-            ls -al
-            ls -al /BLOG/next
+            cd /BLOG
             echo "${{ secrets.DOCKER_PWD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
             docker compose down || true
             docker image prune -f

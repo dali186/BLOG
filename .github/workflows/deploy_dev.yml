@@ -31,8 +31,8 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           script: |
-            cd /BLOG
-            ls -al
+            sudo touch /BLOG/next/.env.local
+            echo "${{ secrets.NODE_ENV }}" | sudo tee /BLOG/next/.env.local > /dev/null
             echo "${{ secrets.DOCKER_PWD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
             docker compose down || true
             docker image prune -f

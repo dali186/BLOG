@@ -6,6 +6,7 @@ COPY package*.json ./
 RUN npm install
 # Next.js 앱 빌드
 COPY . .
+COPY .env.local ./
 RUN npm run build
 # 포트 설정 (Next.js 기본 포트)
 EXPOSE 3000

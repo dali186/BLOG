@@ -1,11 +1,11 @@
-import { uploadEditorImage } from "@/service/articleFetch";
+import { uploadEditorImage, uploadEditorImageWithAzure } from "@/service/articleFetch";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
     try {
         const formData = await request.formData();
         const file = formData.get('upload') as File;
-        const imageUrl = await uploadEditorImage(file);
+        const imageUrl = await uploadEditorImageWithAzure(file);
         
         return NextResponse.json({ url: imageUrl }, { status: 200 });
     } catch (error) {

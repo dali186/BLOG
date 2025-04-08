@@ -31,6 +31,8 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           script: |
+            cd /BLOG
+            ls -al
             echo "${{ secrets.DOCKER_PWD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
             docker compose down || true
             docker image prune -f

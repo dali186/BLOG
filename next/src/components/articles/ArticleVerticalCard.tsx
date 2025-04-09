@@ -8,7 +8,7 @@ const ArticleVerticalCard = ({ article }: ArticleCardProps ) => {
     const articleDate = article?.createdAt ? new Date(article.createdAt).toLocaleDateString('ko-KR', {year: 'numeric', month: '2-digit', day: '2-digit'}) : '';
 
     return(
-        <div className="bg-white p-6 pt-1 relative font-dot text-sm">
+        <div className="p-6 pt-1 relative font-dot text-sm">
             <div className="flex justify-start text-gray-500">
                 {articleDate}
             </div>

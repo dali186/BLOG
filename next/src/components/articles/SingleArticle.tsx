@@ -11,12 +11,12 @@ const SingleArticle = ({ article }: SingleArticleProps) => {
   return (
     <div className='w-full md:w-9/10 mx-auto'>
       <div className='mx-5 my-3 text-sm'>
-        <a href={`/articles/category/${article?.category}`} className='text-red-600 font-dot tracking-widest'>{article?.category}</a>
+        <a href={`/articles/category/${article?.category}`} className='text-emerald-600 font-dot tracking-widest'>{article?.category}</a>
       </div>
-      <div className='w-full text-gray-800 text-4xl px-5 font-noto leading-none'>
+      <div className='w-full text-gray-800 dark:text-gray-100 text-xl lg:text-4xl px-5 font-noto leading-none'>
         {article?.slug}
       </div>
-      <div className="w-full text-gray-500 px-5 pb-5 pt-2 flex justify-between">
+      <div className="w-full text-gray-500 dark:text-gray-400 text-sm lg:text-lg px-5 pb-5 pt-2 flex justify-between">
         <p>{article?.authorName}</p>
         <span>{articleDate + ' ' + articleTime}</span>
       </div>

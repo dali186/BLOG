@@ -14,11 +14,11 @@ const LoginPage = () => {
           <form action={action}>
             <div className="mb-4">
               <label className="block mb-1" htmlFor="email">이메일</label>
-              <input id="email" type="text" name="email" className="py-2 px-3 border border-gray-300 focus:border-emerald-300 focus:outline-none focus:ring focus:ring-emerald-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
+              <input id="email" type="text" name="email" className="py-2 px-3 border border-gray-300 focus:border-emerald-300 focus:outline-none focus:ring focus:ring-emerald-200 rounded-md shadow-sm mt-1 block w-full text-black" />
             </div>
             <div className="mb-4">
               <label className="block mb-1" htmlFor="password">비밀번호</label>
-              <input id="password" type="password" name="password" className="py-2 px-3 border border-gray-300 focus:border-emerald-300 focus:outline-none focus:ring focus:ring-emerald-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
+              <input id="password" type="password" name="password" className="py-2 px-3 border border-gray-300 focus:border-emerald-300 focus:outline-none focus:ring focus:ring-emerald-200 focus:ring-opacity-80 rounded-md shadow-sm disabled:bg-gray-300 mt-1 block w-full text-black" />
             </div>
             {state?.errors?.email && (
               <p className="text-red-500 mb-4" aria-live="polite">
@@ -29,7 +29,7 @@ const LoginPage = () => {
             <div className="mt-6 flex items-center justify-between">
               <div className="flex items-center">
                 <input id="remember_me" type="checkbox" className="border border-gray-300 text-emerald-600 shadow-sm focus:border-emerald-300 focus:ring focus:ring-emerald-200 focus:ring-opacity-50" />
-                <label htmlFor="remember_me" className="ml-2 block text-sm leading-5 text-gray-900"> 아이디 기억 </label>
+                <label htmlFor="remember_me" className="ml-2 block text-sm leading-5 text-gray-900 dark:text-gray-300"> 아이디 기억 </label>
               </div>
               <a href="#" className="text-sm"> 비밀번호를 잊으셨나요? </a>
             </div>

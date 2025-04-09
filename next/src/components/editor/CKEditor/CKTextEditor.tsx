@@ -37,12 +37,25 @@ function CKTextEditor() {
           placeholder: '생각을 정리하고 공유해보세요...'
         }}
         onReady={(editor) => {
+          // dark / light 감지
+          const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
           editor.editing.view.change((writer) => {
             const rootElement = editor.editing.view.document.getRoot();
             if (rootElement) {
+              writer.setStyle('border', 'none', rootElement);
               writer.setStyle('min-height', '75vh', rootElement);
+              if (isDarkMode) { writer.setStyle('background-color', 'black', rootElement); writer.setStyle('color', '#f3f4f6', rootElement); } 
             }
           })
+
+          const toolBarElement = editor.ui.view.element;
+          if (toolBarElement) {
+            const stickyPanelElement = toolBarElement.querySelector('.ck-sticky-panel__content') as HTMLElement | null;
+            if (stickyPanelElement) {
+              stickyPanelElement.style.border = 'none';
+            }
+          }
         }}
         onChange={handleEditorChange}
       />

@@ -15,11 +15,11 @@ const EditorFooter = async() => {
     })
 
     return (
-        <footer className="fixed bottom-0 left-0 w-full bg-gray-100 text-white p-4 flex justify-between items-center">
+        <footer className="fixed bottom-0 left-0 w-full bg-gray-100 dark:bg-gray-300 text-white p-4 flex justify-between items-center">
             <select
                 name="category"
                 id="category"
-                className="block px-4 py-2 bg-white border-2 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-gray-800 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-teal-400 dark:focus:border-teal-400 transition-all ease-in-out font-dot"
+                className="block w-32 lg:w-auto px-4 py-2 bg-white border-2 border-gray-300  rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-gray-800 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-teal-400 dark:focus:border-teal-400 transition-all ease-in-out font-dot"
                 defaultValue=""
             >
                 <option value="" disabled>카테고리 선택</option>

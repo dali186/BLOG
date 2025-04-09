@@ -11,7 +11,7 @@ services:
       - next-network
 
   next:
-    image: kizm2wnkizm2wn/next-blog
+    image: kizm2wn/next-blog
     ports:
       - "3000:3000"
     environment:

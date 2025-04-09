@@ -93,6 +93,29 @@ export const addArticle = async ( article: Article ) => {
 }
 
 /*
+    게시글 수정정
+
+    @param {Article} article
+    @returns {Article | null}
+*/
+export const updateArticle = async ( article: Article ) => {
+    try {
+        const client = await clientPromise;
+        const db = client.db(process.env.MONGODB_NAME);
+
+        console.log(article);
+        const result = await db.collection('articles').updateOne(
+            { id: article.id },
+            { $set: {...article} }
+        );
+
+        return result;
+    } catch (err: any) {
+        throw new Error(err.message);
+    }
+}
+
+/*
     게시글 임시 저장
 
     @param {Formdata} formdata

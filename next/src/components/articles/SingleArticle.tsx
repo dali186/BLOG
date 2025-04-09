@@ -1,10 +1,12 @@
+import { verifySession } from '@/lib/auth/session';
 import { Article } from '@/types/types';
 
 interface SingleArticleProps {
   article: Article | null;
 }
 
-const SingleArticle = ({ article }: SingleArticleProps) => {
+const SingleArticle = async ({ article }: SingleArticleProps) => {
+  const isEditable = (await verifySession()).userEmail === article?.authorId;
   const articleDate = article?.createdAt ? new Date(article.createdAt).toLocaleDateString('ko-KR', {year: 'numeric', month: '2-digit', day: '2-digit'}) : '';
   const articleTime = article?.createdAt ? new Date(article.createdAt).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false }).replace(/\s/g, '') : '';
 
@@ -17,7 +19,9 @@ const SingleArticle = ({ article }: SingleArticleProps) => {
         {article?.slug}
       </div>
       <div className="w-full text-gray-500 dark:text-gray-400 text-sm lg:text-lg px-5 pb-5 pt-2 flex justify-between">
-        <p>{article?.authorName}</p>
+        <p>{article?.authorName} {isEditable && (
+          <a href={`/articles/edit/${article?.slug}`} className='text-emerald-600 underline text-bold'>수정하기</a>
+        )}</p>
         <span>{articleDate + ' ' + articleTime}</span>
       </div>
       <hr className='mt-2 mb-4'/>

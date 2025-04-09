@@ -8,8 +8,8 @@ import 'ckeditor5/ckeditor5.css';
 import { useState } from 'react';
 import { EditorImageUploadAdapterPlugin } from './imgAdapter/UploadAdapter';
 
-function CKTextEditor() {
-  const [editorContent, setEditorContent] = useState();
+function CKTextEditor({ content }: { content?: string }) {
+  const [editorContent, setEditorContent] = useState( content || '');
 
   const handleEditorChange = (event: any, editor: any) => {
     const content = editor.getData();
@@ -18,7 +18,9 @@ function CKTextEditor() {
   return (
     <>
       <CKEditor
+        key={content}
         editor={ClassicEditor}
+        data={editorContent}
         config={{
           licenseKey: 'GPL',
           plugins: [
@@ -59,7 +61,7 @@ function CKTextEditor() {
         }}
         onChange={handleEditorChange}
       />
-      <textarea id='content' name='content' className='hidden' value={editorContent}/>
+      <textarea id='content' name='content' className='hidden' defaultValue={editorContent}/>
     </>
   );
 }

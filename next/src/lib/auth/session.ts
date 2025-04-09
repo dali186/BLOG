@@ -34,7 +34,7 @@ export const createSession = async(userEmail: string) => {
 
     cookieStore.set('session', session, {
         httpOnly: true,
-        secure: true,
+        secure: false,
         expires: expiresAt,
         sameSite: 'lax',
         path: '/',

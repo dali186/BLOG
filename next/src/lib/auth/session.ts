@@ -26,7 +26,6 @@ export const decryptJWT = async(session: string | undefined = '') => {
         
         return payload;
     } catch (error) {
-        logger.error('JWT 검증 실패', { error });
         return null;
     }
 }
@@ -65,8 +64,13 @@ export const updateSession = async() => {
 }
 
 export const deleteSession = async () => {
-  const cookieStore = await cookies()
-  cookieStore.delete('session')
+  const cookieStore = await cookies();
+  const session = await verifySession();
+
+  if (session.userEmail && typeof session.userEmail === 'string') {
+    logger.info('Session Deleted', { userEmail: session.userEmail });
+  }
+  cookieStore.delete('session');
 }
 
 export const verifySession = async () => {

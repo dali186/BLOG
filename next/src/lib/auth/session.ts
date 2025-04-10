@@ -3,6 +3,7 @@ import { Member, SessionPayload } from '@/types/types';
 import { jwtVerify, SignJWT } from 'jose';
 import { cookies } from 'next/headers';
 import 'server-only';
+import { logger } from '../util/logger';
 
 const secrectKey = process.env.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secrectKey);
@@ -16,13 +17,17 @@ export const encryptJWT = async(payload: SessionPayload) => {
 }
 
 export const decryptJWT = async(session: string | undefined = '') => {
+    if (!session) return null;
+    
     try {
         const { payload } = await jwtVerify(session, encodedKey, {
             algorithms: ['HS256'],
-        })
+        });
+        
         return payload;
     } catch (error) {
-        console.log('JWT이 존재하지 않거나나 복호화에 실패하였습니다.');
+        logger.error('JWT 검증 실패', { error });
+        return null;
     }
 }
 
@@ -68,8 +73,9 @@ export const verifySession = async () => {
     const cookie = (await cookies()).get('session')?.value;
     const session = await decryptJWT(cookie);
 
-    return !session?.userEmail ? { isLoggedIn: false } : { isLoggedIn: true, userEmail: session.userEmail };
-
+    if (!session) return { isLoggedIn: false };
+    
+    return !session.userEmail ? { isLoggedIn: false } : { isLoggedIn: true, userEmail: session.userEmail };
 }
 
 export const getMemberInfo = async (): Promise<Member | null> => {
@@ -82,7 +88,7 @@ export const getMemberInfo = async (): Promise<Member | null> => {
 
       return member;
     } catch (error) {
-      console.log('사용자 정보 조회 실패');
+      logger.error('사용자 정보 조회 실패', { error });
 
       return null;
     }

@@ -1,5 +1,6 @@
 import { Member } from "@/types/types"
 import clientPromise from "@/lib/db/mongod"
+import { logger } from "@/lib/util/logger";
 
 /*
     사용자 조회
@@ -18,13 +19,15 @@ export const getMember = async (type: string, value: string): Promise<Member> =>
         else { throw new Error('유효하지 않은 속성입니다.') }
 
         const member: Member | null = await db.collection<Member>('member').findOne(cond);
-        console.log(member);
+        logger.debug('사용자 조회 결과', { member });
+        
         if (!member) {
             throw new Error('해당 사용자를 찾을 수 없습니다.');
         }
         return member;
 
     } catch (err: any) {
+        logger.error('사용자 조회 실패', { error: err.message });
         throw new Error(err.message);
     }
 }

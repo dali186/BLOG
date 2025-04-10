@@ -8,14 +8,14 @@ const SignUpPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="max-w-md w-full p-6 bg-white rounded-lg">
+      <div className="max-w-md w-full p-6 rounded-lg">
         <div className="flex justify-center mb-8">
           <img src="/images/logo.png" alt="Logo" className="w-30 h-20" />
         </div>
         <h1 className="text-2xl font-semibold text-center  mt-8 mb-6">회원가입</h1>
         <form action={action}>
           <div className="mb-4">
-            <label htmlFor="email" className="block mb-2 text-sm text-gray-600">이메일</label>
+            <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-300">이메일</label>
             <input type="email" id="email" name="email" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" />
           </div>
           {state?.errors?.email && (
@@ -25,7 +25,7 @@ const SignUpPage = () => {
           )}
 
           <div className="mb-4">
-            <label htmlFor="name" className="block mb-2 text-sm text-gray-600">이름</label>
+            <label htmlFor="name" className="block mb-2 text-sm text-gray-600 dark:text-gray-300">이름</label>
             <input type="text" id="name" name="name" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" />
           </div>
           {state?.errors?.name && (
@@ -35,7 +35,7 @@ const SignUpPage = () => {
           )}
 
           <div className="mb-4">
-            <label htmlFor="alias" className="block mb-2 text-sm text-gray-600">별명</label>
+            <label htmlFor="alias" className="block mb-2 text-sm text-gray-600 dark:text-gray-300">별명</label>
             <input type="alias" id="alias" name="alias" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" />
           </div>
           {state?.errors?.alias && (
@@ -45,7 +45,7 @@ const SignUpPage = () => {
           )}
 
           <div className="mb-4">
-            <label htmlFor="password" className="block mb-2 text-sm text-gray-600">비밀번호</label>
+            <label htmlFor="password" className="block mb-2 text-sm text-gray-600 dark:text-gray-300">비밀번호</label>
             <input type="password" id="password" name="password" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" />
           </div>
           {state?.errors?.password && (
@@ -60,7 +60,7 @@ const SignUpPage = () => {
           )}
 
           <div className="mb-6">
-            <label htmlFor="confirmPassword" className="block mb-2 text-sm text-gray-600">비밀번호 확인</label>
+            <label htmlFor="confirmPassword" className="block mb-2 text-sm text-gray-600 dark:text-gray-300">비밀번호 확인</label>
             <input type="password" id="confirmPassword" name="confirmPassword" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" />
           </div>
           {state?.errors?.confirmPassword && (

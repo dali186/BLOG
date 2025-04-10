@@ -1,26 +1,33 @@
 import EditorTitle from "../editor/EditorTitle";
 import CKTextEditorWrapper from "../editor/CKEditor/CKTextEditorWrapper";
 import EditorFooter from "../editor/EditorFooter";
-import { addArticleAction } from "@/app/actions/article";
+import { addArticleAction, editArticleAction } from "@/app/actions/article";
 import EditorDescription from "../editor/EditorDescription";
 import EditorTag from "../editor/EditorTag";
+import { Article } from "@/types/types";
 
-const ArticleForm = () => {
+interface articleFormProps {
+    article?: Article;
+}
+
+const ArticleForm = (articleFormProps?: articleFormProps) => {
+    const mode = articleFormProps?.article ? 'edit' : 'create';
+    const action = mode === 'create' ? addArticleAction : editArticleAction;
 
     return(
-        <form action={addArticleAction} id="articleForm" name="articleForm" className="p-6 pt-1">
+        <form action={action} id="articleForm" name="articleForm" className="p-6 pt-1">
             <div className="relative z-0 mb-6 w-full group">
-                <EditorTitle />
-                <EditorDescription />
+                <EditorTitle title={articleFormProps?.article?.slug} />
+                <EditorDescription description={articleFormProps?.article?.description} />
             </div>
             <div>
-                <CKTextEditorWrapper />
+                <CKTextEditorWrapper content={articleFormProps?.article?.content} />
             </div>
             <div className="mb-16 pt-3">
-                <EditorTag />
+                <EditorTag tags={articleFormProps?.article?.tags ?? []} />
             </div>
             <div>
-                <EditorFooter />
+                <EditorFooter category={articleFormProps?.article?.category} />
             </div>
         </form>
     );

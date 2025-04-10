@@ -4,6 +4,7 @@ import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 import fs from "fs";
 import { BlobServiceClient } from "@azure/storage-blob";
+import { logger } from "@/lib/util/logger";
 
 /*
     게시글 리스트 조회
@@ -103,7 +104,7 @@ export const updateArticle = async ( article: Article ) => {
         const client = await clientPromise;
         const db = client.db(process.env.MONGODB_NAME);
 
-        console.log(article);
+        logger.debug('게시글 수정 요청', { article });
         const result = await db.collection('articles').updateOne(
             { id: article.id },
             { $set: {...article} }
@@ -111,6 +112,7 @@ export const updateArticle = async ( article: Article ) => {
 
         return result;
     } catch (err: any) {
+        logger.error('게시글 수정 실패', { error: err.message });
         throw new Error(err.message);
     }
 }
@@ -245,10 +247,11 @@ export const uploadEditorImageWithAzure = async(image: File) => {
         });
 
         const imgUrl = `https://${blobServiceClient.accountName}.blob.core.windows.net/${container}/${fileName}`;
+        logger.info('이미지 업로드 성공', { fileName, imgUrl });
 
         return imgUrl;
     } catch (err: any) {
-        console.error('Azure Blob Storage 업로드 실패: ', err);
+        logger.error('Azure Blob Storage 업로드 실패', { error: err.message });
         throw new Error('이미지 업로드 실패');
     }
 }

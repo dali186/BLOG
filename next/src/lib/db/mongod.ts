@@ -7,7 +7,7 @@ let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
 if (!uri) {
-    throw new Error('.env.local 파일 MongoDB URI 정보 누락.');
+    throw new Error('MONGODB_URI 환경 변수가 설정되지 않았습니다.');
 }
 
 if (process.env.NODE_ENV === 'development') {

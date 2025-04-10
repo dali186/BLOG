@@ -19,7 +19,6 @@ export const getMember = async (type: string, value: string): Promise<Member> =>
         else { throw new Error('유효하지 않은 속성입니다.') }
 
         const member: Member | null = await db.collection<Member>('member').findOne(cond);
-        logger.debug('사용자 조회 결과', { member });
         
         if (!member) {
             throw new Error('해당 사용자를 찾을 수 없습니다.');

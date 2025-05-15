@@ -59,6 +59,7 @@ export const getArticle = async ( slug: string ): Promise<Article> => {
     try {
         const client = await clientPromise;
         const db = client.db(process.env.MONGODB_NAME);
+        console.log(slug);
         const article: Article | null = await db
             .collection<Article>('articles')
             .findOne({ slug });

@@ -1,6 +1,6 @@
 'use client';
 
-import { signUp } from "@/app/actions/auth";
+import { signUp } from "@/server-actions/auth";
 import { useActionState } from "react";
 
 const SignUpPage = () => { 

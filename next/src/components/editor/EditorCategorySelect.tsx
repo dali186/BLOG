@@ -1,5 +1,5 @@
 import { convertTree } from "@/lib/util/util";
-import { getCategories } from "@/service/articleFetch";
+import { getCategories } from "@/service/articleService";
 
 interface selectedCategory {
     selectedCategory?: string;

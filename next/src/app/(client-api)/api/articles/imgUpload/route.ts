@@ -1,4 +1,4 @@
-import { uploadEditorImage, uploadEditorImageWithAzure } from "@/service/articleFetch";
+import { uploadEditorImage, uploadEditorImageWithAzure } from "@/service/articleService";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {

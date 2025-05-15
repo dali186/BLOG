@@ -1,7 +1,7 @@
 import EditorTitle from "../editor/EditorTitle";
 import CKTextEditorWrapper from "../editor/CKEditor/CKTextEditorWrapper";
 import EditorFooter from "../editor/EditorFooter";
-import { addArticleAction, editArticleAction } from "@/app/actions/article";
+import { addArticleAction, editArticleAction } from "@/server-actions/article";
 import EditorDescription from "../editor/EditorDescription";
 import EditorTag from "../editor/EditorTag";
 import { Article } from "@/types/types";

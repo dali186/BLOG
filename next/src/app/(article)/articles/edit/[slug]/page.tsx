@@ -1,6 +1,6 @@
 import ArticleForm from "@/components/articles/ArticleForm";
 import Loader from "@/components/Loader";
-import { getArticle } from "@/service/articleFetch";
+import { getArticle } from "@/service/articleService";
 import { Article } from "@/types/types";
 import { Suspense } from "react";
 

@@ -1,9 +1,9 @@
-import { getMember } from '@/service/memberFetch';
+import { getMember } from '@/service/memberService';
 import { Member, SessionPayload } from '@/types/types';
 import { jwtVerify, SignJWT } from 'jose';
 import { cookies } from 'next/headers';
 import 'server-only';
-import { logger } from '../util/logger';
+import { logger } from '../logger';
 
 const secrectKey = process.env.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secrectKey);

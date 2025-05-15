@@ -1,4 +1,4 @@
-import { verifySession } from '@/lib/auth/session';
+import { verifySession } from '@/lib/util/auth/session';
 import { Article } from '@/types/types';
 
 interface SingleArticleProps {

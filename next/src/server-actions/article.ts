@@ -1,8 +1,8 @@
 'use server';
 
-import { getMemberInfo } from "@/lib/auth/session"
+import { getMemberInfo } from "@/lib/util/auth/session"
 import { separateTags } from "@/lib/util/util";
-import { addArticle, updateArticle } from "@/service/articleFetch";
+import { addArticle, updateArticle } from "@/service/articleService";
 import { Article, Member } from "@/types/types"
 import { redirect } from "next/navigation";
 

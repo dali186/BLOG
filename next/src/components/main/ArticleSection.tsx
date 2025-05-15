@@ -1,4 +1,4 @@
-import { getAllAtricles } from "@/service/articleFetch";
+import { getAllAtricles } from "@/service/articleService";
 import { Article } from "@/types/types";
 import { Suspense } from "react";
 import Loader from "../Loader";

@@ -1,5 +1,5 @@
 import Tag from "@/components/atoms/Tag";
-import { getTags } from "@/service/articleFetch";
+import { getTags } from "@/service/articleService";
 
 const TagSection = async() => {
     const tags: string[] = await getTags();

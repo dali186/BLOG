@@ -1,4 +1,4 @@
-import { getArticle } from "@/service/articleFetch"
+import { getArticle } from "@/service/articleService"
 import { Suspense } from "react";
 import Loader from "@/components/Loader";
 import SingleArticle from "@/components/articles/SingleArticle";

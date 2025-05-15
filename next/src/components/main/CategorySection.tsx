@@ -1,5 +1,5 @@
 import { convertTree } from "@/lib/util/util";
-import { getCategories } from "@/service/articleFetch";
+import { getCategories } from "@/service/articleService";
 import { Category } from "@/types/types";
 import { ReactNode } from "react";
 

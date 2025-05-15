@@ -1,6 +1,6 @@
 import VerticalArticleCardList from "@/components/articles/VerticalArticleCardList";
 import Loader from "@/components/Loader";
-import { getArticlesByCond } from "@/service/articleFetch";
+import { getArticlesByCond } from "@/service/articleService";
 import { Article } from "@/types/types";
 import { Suspense } from "react";
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { signIn } from "@/app/actions/auth";
+import { signIn } from "@/server-actions/auth";
 import { useActionState } from "react";
 import { useState } from "react";
 

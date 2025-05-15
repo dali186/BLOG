@@ -1,4 +1,4 @@
-import { addArticleTemp } from "@/service/articleFetch";
+import { addArticleTemp } from "@/service/articleService";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {

@@ -1,4 +1,4 @@
-import { getArticlesByCond } from "@/service/articleFetch";
+import { getArticlesByCond } from "@/service/articleService";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {

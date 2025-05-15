@@ -1,4 +1,4 @@
-import { verifySession } from "@/lib/auth/session";
+import { verifySession } from "@/lib/util/auth/session";
 import SignOutHref from "./atoms/SignOutHref";
 
 const Header = async() => {

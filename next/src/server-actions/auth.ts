@@ -1,11 +1,11 @@
 'use server';
 
 import * as bcrypt from 'bcryptjs';
-import { SignUpFormState, SignUpFormSchema } from "@/lib/validation/signUp";
-import { SignInFormState, SignInFormSchema } from "@/lib/validation/signIn";
+import { SignUpFormState, SignUpFormSchema } from "@/lib/util/validation/signUp";
+import { SignInFormState, SignInFormSchema } from "@/lib/util/validation/signIn";
 import { Member } from "@/types/types";
-import { addMember, getMember } from "@/service/memberFetch";
-import { createSession, deleteSession } from '@/lib/auth/session';
+import { addMember, getMember } from "@/service/memberService";
+import { createSession, deleteSession } from '@/lib/util/auth/session';
 import { redirect } from 'next/navigation';
 
 /* 로그인 */
